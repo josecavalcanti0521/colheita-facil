@@ -1,39 +1,34 @@
 import db from '../config/connection.js';
 import { DataTypes } from 'sequelize';
 
-const Colheita = db.define('colheita', {
+const Colheita = db.define('colheitas', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        field: 'id',
-        allowNull: false
     },
-    nomeFruta: {
+    nome_fruta: {
         type: DataTypes.STRING,
         field: 'nome_fruta',
-        allowNull: false
+        allowNull: false,
     },
-    quantidadeCaixas: {
+    quantidade_caixas: {
         type: DataTypes.INTEGER,
         field: 'quantidade_caixas',
-        allowNull: false
+        allowNull: false,
     },
     maturacao: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         field: 'maturacao',
-        allowNull: false
+        allowNull: false,
     },
-    precoDia: {
+    preco_dia: {
         type: DataTypes.FLOAT(),
-        field: 'maturacao',
-        allowNull: false
+        field: 'preco_dia',
+        allowNull: false,
     },
-    createdAt: {
-        type: DataTypes.DATE,
-        field: 'created_at',
-        allowNull: false
-    }
+}, {
+    timestamps: true,
 });
 
 Colheita.sync()

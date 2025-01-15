@@ -1,20 +1,48 @@
 import Colheita from '../models/Colheita.js';
 
 const createColheita = (async (req, res) => {
-    const { nomeFruta, quantidadeCaixas, maturacao, precoDia } = req.body;
+    const { nome_fruta, quantidade_caixas, maturacao, preco_dia } = req.body;
 
     try {
-        const newColheita = Colheita.create({
-            nomeFruta,
-            quantidadeCaixas,
+        const newColheita = await Colheita.create({
+            nome_fruta,
+            quantidade_caixas,
             maturacao,
-            precoDia
+            preco_dia
         });
-        return res.status(201).json(newColheita);
+
+        return res.json(newColheita).status(201);
     } catch(error) {
         console.log(`Erro ao criar um nova colheita: ${error}`);
         return res.status(500).json({ error: 'Erro ao criar um nova colheita' });
     }
 });
 
-export default createColheita;
+const getsColheita = (async (req, res) => {
+    try {
+        const colheitas = await Colheita.findAll();
+        return res.json(colheitas).status(200);
+    } catch(error) {
+        console.log(`Erro ao retornar todas as colheitas: ${error}`);
+        return res.status(500).json({ error: 'Erro ao retornar todas as colheitas' });
+    }
+});
+
+const deleteColheita = (async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const delColheita = await Colheita.destroy({
+            where: {
+                id: id
+            }
+        });
+        return res.status(200).json({ message: 'Colheita deletada com sucesso.' });
+    } catch(error) {
+        console.log(`Erro ao deletar colheita: ${error}`);
+        return res.status(404).json({ message: 'Erro ao deletar colheita.' })
+    }
+
+});
+
+export { createColheita, getsColheita, deleteColheita };

@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import createColheita from '../controllers/colheitaControllers.js';
+import { createColheita, getsColheita, deleteColheita } from '../controllers/colheitaControllers.js';
 
 const router = Router();
 
-router.get('/add', createColheita);
+router.post('/add', createColheita);
+router.get('/gets', getsColheita);
+router.delete('/del/:id', deleteColheita);
 
 export default router;

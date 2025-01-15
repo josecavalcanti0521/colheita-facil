@@ -5,6 +5,7 @@ import routes from './routes/colheitaRouter.js';
 const app = express();
 dotenv.config();
 
-app.use('/colheita', routes);
+app.use(express.json());
+app.use('/api', routes);
 
 export default app;
