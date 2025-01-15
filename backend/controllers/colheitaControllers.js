@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import Colheita from '../models/Colheita.js';
 
 const createColheita = (async (req, res) => {
@@ -45,4 +46,30 @@ const deleteColheita = (async (req, res) => {
 
 });
 
-export { createColheita, getsColheita, deleteColheita };
+const updateColheita = (async (req, res) => {
+    const { nome_fruta, quantidade_caixas, maturacao, preco_dia } = req.body;
+    const { id } = req.params;
+
+    try {
+        const updColheita = await Colheita.update(
+            {
+                nome_fruta: nome_fruta,
+                quantidade_caixas: quantidade_caixas,
+                maturacao: maturacao, 
+                preco_dia: preco_dia
+            },
+            {
+                where: {
+                    id: id
+                }
+            }
+        );
+        return res.status(200).json({ message: 'Sucesso ao alterar colheita.' });
+    } catch(error) {
+        console.log(`Erro ao alterar colheita: ${error}`);
+        return res.status(404).json({ message: 'Erro ao alterar colheita.' });
+    }
+
+})
+
+export { createColheita, getsColheita, deleteColheita, updateColheita };
