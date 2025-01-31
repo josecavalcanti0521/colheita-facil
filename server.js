@@ -1,5 +1,5 @@
-import app from './backend/app.js';
-import sequelize from './backend/config/connection.js';
+import app from './src/app.js';
+import sequelize from './src/db/connection.js';
 
 sequelize
     .authenticate()
