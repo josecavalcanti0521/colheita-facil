@@ -1,37 +1,72 @@
 # Colheita-Fácil
 
-Este projeto consiste em uma API para criar, ler, alterar e deletar dados de colheitas de frutas de uma fazenda.
+Este projeto é uma API para gerenciar dados de colheitas de frutas em uma fazenda, permitindo a criação, consulta, atualização e exclusão de registros.
 
 ## Tecnologias Utilizadas
+   - JavaScript
+   - Node.js
+   - Express
+   - SQLite
+   - Sequelize
+   - dotenv
+   - nodemon
 
-1. **JavaScript**:
-   - Linguagem de programação principal usada para desenvolver toda a lógica da API.
+## Funcionalidades
+   - Adicionar uma nova colheita
+   - Listar todas as colheitas
+   - Buscar uma colheita pelo ID
+   - Buscar colheitas pela data de criação
+   - Atualizar uma colheita pelo ID
+   - Deletar uma colheita pelo ID
 
-2. **Node.js**:
-   - Ambiente de execução JavaScript que permite executar código JavaScript no lado do servidor.
+## Pré-requisitos
 
-3. **Express**:
-   - Framework para Node.js que facilita a criação de aplicativos web e APIs, fornecendo uma série de funcionalidades robustas para gerenciar rotas, middleware e solicitações HTTP.
+Para interagir com a API, utilize um cliente para requisições HTTP, como Postman ou Insomnia, para testar os endpoints.
 
-4. **SQLite**:
-   - Banco de dados leve utilizado para armazenar os dados das colheitas. Escolhido por sua simplicidade e facilidade de uso, ideal para projetos de menor escala.
+## Como utilizar
 
-5. **Sequelize**:
-   - ORM (Object-Relational Mapping) para Node.js, que facilita a interação com bancos de dados SQL. Permite definir modelos e realizar operações de CRUD (Create, Read, Update, Delete) de forma mais intuitiva.
+1. **Clonar o repositório:**  
+   ```sh
+   git clone https://github.com/josecavalcanti0521/colheita-facil.git
+2. **Acessar a pasta do projeto:**  
+   ```sh
+   cd colheita-facil
+1. **Instalar as dependências:**  
+   ```sh
+   npm install
+1. **Iniciar o projeto:**  
+   ```sh
+   npm run dev
 
-6. **dotenv**:
-   - Biblioteca que carrega variáveis de ambiente a partir de um arquivo `.env` para dentro de `process.env`. Isso ajuda a manter configurações sensíveis, como senhas de banco de dados e chaves de API, fora do código-fonte.
 
-7. **nodemon**:
-   - Ferramenta que monitoriza mudanças nos arquivos da aplicação e reinicia automaticamente o servidor Node.js quando uma alteração é detectada. Facilita o desenvolvimento, eliminando a necessidade de reiniciar manualmente o servidor após cada mudança.
+### Endpoints
 
-## Como Usar
+- **Adicionar nova colheita:**
+  - **Método:** `POST`
+  - **Endpoint:** `/api/`
+  - **Descrição:** Adiciona uma nova colheita ao banco de dados.
 
-Para usar a API, é necessário um programa para teste de endpoints, como o Postman ou Insomnia.
+- **Listar todas as colheitas:**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/`
+  - **Descrição:** Retorna uma lista de todas as colheitas cadastradas.
 
-### Rotas
+- **Buscar colheita por ID:**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/:id`
+  - **Descrição:** Retorna os detalhes de uma colheita específica pelo seu ID.
 
-- `POST /api/add`: Adiciona uma nova colheita.
-- `GET /api/gets`: Retorna todas as colheitas.
-- `DELETE /api/del/:id`: Deleta uma colheita pelo ID.
-- `PUT /api/upd/:id`: Atualiza uma colheita pelo ID.
+- **Buscar colheita por data:**
+  - **Método:** `GET`
+  - **Endpoint:** `/api/:year/:month/:day`
+  - **Descrição:** Retorna as colheitas realizadas em uma data específica (ano, mês, dia).
+
+- **Deletar colheita por ID:**
+  - **Método:** `DELETE`
+  - **Endpoint:** `/api/:id`
+  - **Descrição:** Remove uma colheita do banco de dados com base no seu ID.
+
+- **Atualizar colheita por ID:**
+  - **Método:** `PUT`
+  - **Endpoint:** `/api/:id`
+  - **Descrição:** Atualiza as informações de uma colheita específica pelo seu ID.
