@@ -6,6 +6,6 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use('/api', colheitaRouter);
+app.use('/api/', colheitaRouter);
 
 export default app;

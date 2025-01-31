@@ -1,6 +1,7 @@
 import Colheita from "../models/Colheita.js";
+import { Op } from "sequelize";
 
-class ColheitaRepository {
+export default class ColheitaRepository {
     static async createColheita(data) {
         return await Colheita.create(data);
     }
@@ -19,6 +20,7 @@ class ColheitaRepository {
 
     static async updateColheita(id, data) {
         const colheita = await data;
+
         const updateColheita = await Colheita.update(
                 data,
             { 
@@ -32,11 +34,7 @@ class ColheitaRepository {
     }
 
     static async deleteColheita(id) {
-        const colheita = await Colheita.findAll({
-            where: {
-                id
-            }
-        });
+        const colheita = await this.getColheitaById(id);
 
         const deleteColheita = await Colheita.destroy({
             where: {
@@ -46,6 +44,17 @@ class ColheitaRepository {
 
         return colheita;
     }
-}
 
-export default ColheitaRepository;
+    static async getColheitaByDate(year, month, day) {
+        const colheita = await Colheita.findAll({
+            where: {
+                createdAt: {
+                    [Op.gte]: new Date(`${year}-${month}-${day}T00:00:00.000Z`),
+                    [Op.lte]: new Date(`${year}-${month}-${day}T23:59:59.999Z`)
+                }
+            }
+        });
+
+        return colheita;
+    }
+}

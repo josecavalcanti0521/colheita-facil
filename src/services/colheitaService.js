@@ -1,6 +1,6 @@
 import ColheitaRepository from "../repositories/colheitaRepository.js";
 
-class ColheitaService {
+export default class ColheitaService {
     static async createColheita(data) {
         try {
             return ColheitaRepository.createColheita(data);
@@ -21,7 +21,7 @@ class ColheitaService {
         try {
             return ColheitaRepository.getColheitaById(id);
         } catch(error) {
-            throw Error('Error ao retornar colheita.');
+            throw Error('Error ao retornar colheita por id.');
         }
     }
 
@@ -49,6 +49,15 @@ class ColheitaService {
         }
     }
 
+    static async getColheitaByDate(year, month, day) {
+        try {
+            const colheita = await ColheitaRepository.getColheitaByDate(year, month, day);
+            return {
+                message: 'Sucesso ao retornar colheita por data.',
+                colheita: colheita
+            }
+        } catch(error) {
+            throw Error(`Error ao retornar colheita por data: ${error}`);
+        }
+    }
 }
-
-export default ColheitaService;

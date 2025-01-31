@@ -1,6 +1,6 @@
 import ColheitaService from '../services/colheitaService.js';
 
-export class ColheitaController {
+export default class ColheitaController {
     static async createColheita(req, res) {
         try {
             const data = req.body;
@@ -45,6 +45,16 @@ export class ColheitaController {
         try {
             const { id } = req.params;
             const colheita = await ColheitaService.deleteColheita(id);
+            return res.status(200).json(colheita);
+        } catch(error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
+
+    static async getColheitaByDate(req, res) {
+        try {
+            const { year, month, day } = req.params;
+            const colheita = await ColheitaService.getColheitaByDate(year, month, day);
             return res.status(200).json(colheita);
         } catch(error) {
             return res.status(400).json({ error: error.message });
